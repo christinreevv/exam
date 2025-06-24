@@ -42,4 +42,13 @@ class ProductController extends Controller
         $product = Product::with('category')->findOrFail($id);
         return response()->json($product);
     }
+
+    public function latest()
+{
+    $products = Product::orderBy('created_at', 'desc')->take(5)->get();
+    return response()->json($products);
+}
+
+
+
 }

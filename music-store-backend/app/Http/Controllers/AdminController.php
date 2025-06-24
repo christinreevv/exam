@@ -77,18 +77,10 @@ class AdminController extends Controller
         return response()->json($category);
     }
 
-    public function deleteCategory($id)
+    public function deleteCategory(Category $category)
     {
-        $category = Category::findOrFail($id);
-
-        // Удалим все товары в этой категории
-        $category->products()->delete();
-
-        // Затем удалим саму категорию
         $category->delete();
 
-        return response()->json(['message' => 'Категория и все связанные товары удалены']);
+        return response()->json(['message' => 'Категория удалена']);
     }
-
-
 }
